@@ -68,6 +68,9 @@
                         <?php echo anchor('/', lang('Baiboly.home'), ['class' => 'nav-link']) ?>
                     </li>
                     <li class="nav-item">
+                        <?php echo anchor('baiboly/fitadiavana', lang('Baiboly.fitadiavana'), ['class' => 'nav-link']) ?>
+                    </li>
+                    <li class="nav-item">
                         <?php echo anchor('boky', lang('Baiboly.boky_rehetra'), ['class' => 'nav-link']) ?>
                     </li>
                     <li class="nav-item">
