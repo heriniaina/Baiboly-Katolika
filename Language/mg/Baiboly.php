@@ -31,5 +31,10 @@ return [
     'mamaky_baiboly_mitohy' => 'mamaky baiboly mitohy',
     'pejy_voatahiry' => 'lisitry ny voatahiry',
     'ho_tehirizina' => 'Hotehirizina : ',
+    'voafafa_ny_tahiry' => 'Voafafa ny tahiry.',
+    'hamafa_tahiry' => 'Hamafa tahiry',
+    'hofafaina_ny_tahiry' => 'Tianao hofafaina tokoa ve ny tahiry?',
+    'eny' => 'Eny',
+    'tsia' => 'Tsia',
     
 ];

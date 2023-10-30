@@ -16,6 +16,7 @@ $routes->group('baiboly', ['namespace' => '\Baiboly\Controllers'], static functi
     $routes->get('hamaky', 'BaibolyController::hamaky');
     $routes->get('tahiry', 'TahiryController::index', ['filter' => 'auth']);
     $routes->match(['get', 'post'], 'tahiry/create', 'TahiryController::create', ['filter' => 'auth']);
+    $routes->get('tahiry/delete/(:num)(:any)', 'TahiryController::delete/$1$2', ['filter' => 'auth']);
 });
 
 

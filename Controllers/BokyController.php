@@ -282,7 +282,14 @@ class BokyController extends BaseController
                 return $this->response->download($file, null);
 
             case 'json':
-                break;
+                $boky['andininy'] = $rows;
+                $boky['page'] = [
+                    'first' => $aModel->pager->getFirstPage(),
+                    'last' => $aModel->pager->getLastPage(),
+                    'current' => $aModel->pager->getCurrentPage(),
+                    'total' => $aModel->pager->getTotal()
+                ];
+                return $this->response->setJSON($boky);
             default:
                 return view('\Baiboly\Views\boky_andininy', $this->data);
 

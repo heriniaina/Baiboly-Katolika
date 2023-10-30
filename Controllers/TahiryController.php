@@ -43,4 +43,14 @@ class TahiryController extends BaseController {
 
         return view('\Baiboly\Views\tahiry_create', $this->data);
     }
+
+    public function delete($id, $confirm = false) {
+        if(!$confirm) {
+            $this->data['page_title'] = lang('Baiboly.hamafa_tahiry');
+            return view('\Baiboly\Views\tahiry_delete', $this->data);
+        }
+        (new TahiryModel())->where(['username' => $this->user['username'], 'id' => $id])->delete();
+
+        return redirect()->to('baiboly/tahiry')->with('message', lang('Baiboly.voafafa_ny_tahiry'));
+    }
 }
