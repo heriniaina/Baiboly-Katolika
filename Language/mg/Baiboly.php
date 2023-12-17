@@ -36,5 +36,5 @@ return [
     'hofafaina_ny_tahiry' => 'Tianao hofafaina tokoa ve ny tahiry?',
     'eny' => 'Eny',
     'tsia' => 'Tsia',
-    
+    'tsy_hita_ny_boky' => 'Tsy hita io boky io. Hamarino tsara.',
 ];

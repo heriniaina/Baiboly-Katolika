@@ -4,7 +4,7 @@
 <div class="baiboly_index">
     <div class="float-end tehirizo">
 
-        <?php echo anchor('baiboly/tahiry/create?uri=' . urlencode(uri_string() . "?" . $request->getUri()->getQuery()) . '&name=' . $page_title, lang('Baiboly.tehirizo') . ' <i class="bi-bookmark"></i>', ['class' => 'btn btn-default']) ?>
+        <?php echo anchor('baiboly/tahiry/create?uri=' . urlencode(uri_string() . "?" . $request->getUri()->getQuery()) . '&name=' . $page_title, lang('Baiboly.tehirizo') . ' <i class="bi-bookmark"></i>', ['class' => 'btn btn-outline-primary']) ?>
     </div>
     <h1 class="clearfix">
         <?php echo $boky['b_name'] ?>

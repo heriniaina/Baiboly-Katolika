@@ -39,12 +39,15 @@ class BokyController extends BaseController
     }
     public function show($boky)
     {
-        $boky = (new BokyModel())->where('b_sname', $boky)->first();
+        $boky = (new BokyModel())->getBoky()->where('alt.alt_name', $boky)->first();
+
         if (!$boky) {
             return redirect()->to('boky')->with('error', lang('Baiboly.tsy_hita_ny_boky'));
         }
         $this->data['boky'] = $boky;
-        $this->data['rows'] = (new TokoModel())->where('t_b_id', $boky['id'])->orderBy('t_toko')->findAll();
+        $rows = (new TokoModel())->where('t_b_id', $boky['alt_b_id'])->orderBy('t_toko')->findAll();
+
+        $this->data['rows'] = $rows;
 
         $this->data['page_title'] = $boky['b_name'];
 
@@ -63,7 +66,9 @@ class BokyController extends BaseController
 
     public function andininy($bokyname, $tokosyandininy)
     {
-        $boky = (new BokyModel())->where('b_sname', $bokyname)->first();
+        $boky = (new BokyModel())->getBoky()->where('alt.alt_name', $bokyname)->first();
+
+        //$boky = (new BokyModel())->where('b_sname', $bokyname)->first();
         if (!$boky) {
             return redirect()->to('boky')->with('error', lang('Baiboly.tsy_hita_ny_boky'));
         }
@@ -72,7 +77,7 @@ class BokyController extends BaseController
         $aModel = new AndininyModel();
         $builder = $aModel->getAndininy();
 
-        $builder->where('b.id', $boky['id']);
+        $builder->where('b.id', $boky['alt_b_id']);
 
         if (false === strpos($tokosyandininy, ':')) {
             //new version
@@ -241,45 +246,43 @@ class BokyController extends BaseController
             case 'sary.jpg':
 
 
-                $file = WRITEPATH . 'ogimage_' . md5($rows['0']['b_sname'] . "_" . $tokosyandininy) . '.jpg';
-
-                if (!file_exists($file) || $this->request->getGet('refresh')) {
-
-                    // define the base image that we lay our text on
-                    $width = 1920;
-                    $height = 1080;
-                    $randfond = rand(0, 4);
-                    $im = imagecreatefromjpeg(ROOTPATH . 'modules/Baiboly/Images/fonds/light_' . $randfond . '.jpg');
-
-                    // setup the text colours
-                    $grey = imagecolorallocate($im, 0, 0, 0);
-                    $white = imagecolorallocate($im, 255, 255, 255);
+                $file = WRITEPATH . 'ogimage_' . date("His") . '.jpg';
 
 
 
-                    $rectangleX = 100; // X-coordinate of the top-left corner of the rectangle
-                    $rectangleY = 100; // Y-coordinate of the top-left corner of the rectangle
-                    $rectangleWidth = $width - 100; // Width of the rectangle
-                    $rectangleHeight = $height - 100; // Height of the rectangle
+                // define the base image that we lay our text on
+                $width = 1920;
+                $height = 1080;
+                $randfond = rand(0, 4);
+                $im = imagecreatefromjpeg(ROOTPATH . 'modules/Baiboly/Images/fonds/light_' . $randfond . '.jpg');
 
-                    $fontsize = 50; //title
-                    $text = wordwrap($rows['0']['b_text'], 40, "\n", false) . "\n     " . "(" . $rows['0']['b_sname'] . ", " . $tokosyandininy . ")";
+                // setup the text colours
+                $grey = imagecolorallocate($im, 0, 0, 0);
+                $white = imagecolorallocate($im, 255, 255, 255);
 
-                    $bbox = imagettfbbox($fontsize, 0, $this->fontname, $text);
 
-                    // This is our cordinates for X and Y
 
-                    $x = $bbox[6] + imagesx($im) / 2 - (ceil($bbox[4] / 2));
-                    $y = $bbox[7] + imagesy($im) / 2 - (ceil($bbox[1] / 2));
+                $rectangleX = 100; // X-coordinate of the top-left corner of the rectangle
+                $rectangleY = 100; // Y-coordinate of the top-left corner of the rectangle
+                $rectangleWidth = $width - 100; // Width of the rectangle
+                $rectangleHeight = $height - 100; // Height of the rectangle
 
-                    // Write it
-                    imagettftext($im, $fontsize, 0, $x, $y, $grey, $this->fontname, $text, ['linespacing' => 1.5]);
-                    // create the image
-                    $img = imagejpeg($im, $file, 90);
-                    return $this->response->setContentType('image/jpeg')->setBody(file_get_contents($file));
-                }
+                $fontsize = 50; //title
+                $text = wordwrap($rows['0']['b_text'], 40, "\n", false) . "\n     " . "(" . $rows['0']['b_sname'] . ", " . $tokosyandininy . ")";
 
-                return $this->response->download($file, null);
+                $bbox = imagettfbbox($fontsize, 0, $this->fontname, $text);
+
+                // This is our cordinates for X and Y
+
+                $x = $bbox[6] + imagesx($im) / 2 - (ceil($bbox[4] / 2));
+                $y = $bbox[7] + imagesy($im) / 2 - (ceil($bbox[1] / 2));
+
+                // Write it
+                imagettftext($im, $fontsize, 0, $x, $y, $grey, $this->fontname, $text, ['linespacing' => 1.5]);
+                // create the image
+                $img = imagejpeg($im, $file, 90);
+                return $this->response->setContentType('image/jpeg')->setBody(file_get_contents($file));
+
 
             case 'json':
                 $boky['andininy'] = $rows;
