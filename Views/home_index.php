@@ -2,7 +2,7 @@
 <?php $this->section('main'); ?>
 <div class="row">
     <div class="col-md-6">
-    <div class="mb-3 homebox">
+        <div class="mb-3 homebox">
             <h1>
                 <?php echo $page_title ?>
             </h1>
@@ -10,18 +10,18 @@
                 <?php echo lang('Baiboly.fandraisana_intro') ?>
             </div>
         </div>
-        
+
         <div class="mb-3 homebox">
             <h1>
                 <?php echo lang('Baiboly.hamaky_baiboly') ?>
             </h1>
             <div>
-                <?php echo lang('Baiboly.hamaky_baiboly_intro', [anchor('baiboly', lang('Baiboly.mamaky_baiboly_mitohy'), ['class'=> 'fw-bold']), anchor('baiboly/tahiry', lang('Baiboly.pejy_voatahiry'), ['class'=> 'fw-bold'])]) ?>
+                <?php echo lang('Baiboly.hamaky_baiboly_intro', [anchor('baiboly', lang('Baiboly.mamaky_baiboly_mitohy'), ['class' => 'fw-bold']), anchor('baiboly/tahiry', lang('Baiboly.pejy_voatahiry'), ['class' => 'fw-bold'])]) ?>
             </div>
         </div>
-        
 
-<div class="mb-3 homebox">
+
+        <div class="mb-3 homebox">
             <h1>
                 <?php echo lang('Baiboly.fitadiavana') ?>
             </h1>
@@ -103,10 +103,25 @@
             </form>
         </div>
 
-        
+
     </div>
     <div class="col-md-6">
-    <div class="mb-3 homebox">
+    <div class="mb-3">
+            <div class="row">
+                <div class="col-6">
+                    <a href="https://play.google.com/store/apps/details?id=com.baiboly.katolika">
+                        <img src="/img/google-play-badge.png" class="img-fluid">
+                    </a>
+                </div>
+                <div class="col-6">
+                    <a href="https://apps.apple.com/us/app/baiboly-katolika/id6742077821">
+                        <img src="/img/apple-store-badge.png" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="mb-3 homebox">
             <h1>
                 <?php echo lang('Baiboly.boky_rehetra') ?>
             </h1>
@@ -120,6 +135,8 @@
                 <?php } ?>
             </div>
         </div>
+
+        
     </div>
 </div>
 

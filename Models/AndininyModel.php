@@ -10,7 +10,18 @@ class AndininyModel extends BaseModel {
     protected $returnType = 'array';
 
     protected $allowedFields = ['id', 'b_t_id', 'b_toko', 'b_and', 'b_text', 'b_notes', 'b_break', 'b_user', 'b_niova'];    
+    protected $afterInsert = ['insertChange'];
+    protected $afterUpdate = ['updateChange'];
+    
+    protected function insertChange($data) {
 
+        (new ChangeModel())->insert(['table' => 'b_and', 'type' =>'c', 'src_id' => $data['id'], 'data' => json_encode($data['data'])]);
+    }
+
+    protected function updateChange($data) {
+
+        (new ChangeModel())->insert(['table' => 'b_and', 'type' =>'u', 'src_id' => $data['id'], 'data' => json_encode($data['data'])]);
+    }
 
     public function getAndininy() {
 
@@ -24,4 +35,7 @@ class AndininyModel extends BaseModel {
 
         return $this;
     }
+
+
+
 }

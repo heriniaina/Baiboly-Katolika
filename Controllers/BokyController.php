@@ -246,9 +246,6 @@ class BokyController extends BaseController
             case 'sary.jpg':
 
 
-                $file = WRITEPATH . 'ogimage_' . date("His") . '.jpg';
-
-
 
                 // define the base image that we lay our text on
                 $width = 1920;
@@ -280,8 +277,12 @@ class BokyController extends BaseController
                 // Write it
                 imagettftext($im, $fontsize, 0, $x, $y, $grey, $this->fontname, $text, ['linespacing' => 1.5]);
                 // create the image
-                $img = imagejpeg($im, $file, 90);
-                return $this->response->setContentType('image/jpeg')->setBody(file_get_contents($file));
+                // Output the image
+                header('Content-Type: image/jpeg');
+                imagejpeg($im);
+                imagedestroy($im);
+                exit;
+                break;
 
 
             case 'json':

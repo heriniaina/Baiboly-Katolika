@@ -4,6 +4,7 @@ namespace Baiboly\Controllers;
 
 use Baiboly\Models\AndininyModel;
 use Baiboly\Models\BokyModel;
+use Baiboly\Models\ChangeModel;
 use Serasera\Base\Controllers\BaseController;
 
 class BaibolyController extends BaseController
@@ -140,6 +141,12 @@ class BaibolyController extends BaseController
 
         
         return view('\Baiboly\Views\baiboly_hamaky', $this->data);
+    }
+
+    public function updates($id = 0) {
+        $rows = (new ChangeModel())->where('id > ', $id)->findAll();
+
+        return $this->response->setJSON($rows);
     }
     
 }
